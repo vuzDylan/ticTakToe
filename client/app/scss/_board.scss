@@ -1,0 +1,27 @@
+.board {
+  .box {
+    width: 33%;
+    height: 33%;
+    border: 3px solid black;
+  }
+
+  .big {
+    border-size: 6px;
+  }
+
+  .top {
+    border-top: none;
+  }
+
+  .bottom {
+    border-bottom: none;
+  }
+
+  .left {
+    border-left: none;
+  }
+
+  .right {
+    border-right: none;
+  }
+}
