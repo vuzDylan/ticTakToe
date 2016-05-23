@@ -7,7 +7,7 @@ export default {
   },
   source: {
     jsMain: './app/js/app.jsx',
-    sass: './app/sass/**/**.sass',
+    scss: './app/scss/**/**.scss',
     scripts: './app/js/**/*.@(js|jsx)',
     html: './app/index.html'
   },
