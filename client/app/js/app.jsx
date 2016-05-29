@@ -11,7 +11,8 @@ window.onload = () => {
       <Router history={browserHistory}>
         { routes }
       </Router>
-    </Provider>
+    </Provider>,
+    document.querySelector('body')
   );
 }
 
