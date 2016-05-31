@@ -1,29 +1,10 @@
-var io = require('socket.io')();
-var game = require('./ticTakToe/game-server.js');
-var express = require('express');
-var app = express();
-var http = require('http');
-var httpServer = http.Server(app);
+import express from 'express';
+import path from 'path';
 
-app.use(express.static(__dirname+'/static'));
+const app = express();
 
-app.get('/', function(req, res){
-    res.sendFile(__dirname + '/index.html');
-});
+app.use('/', express.static('dist'));
 
-app.listen(8000);
+app.use('/*', (req, res)  => res.sendFile(path.join(__dirname, 'dist', 'index.html')));
 
-io.on('connection',function(socket){
-	console.log('web connected');
-	game.getClient(socket);
-
-	socket.on('move',function(move){
-		game.isValid(move);
-	});
-	
-	socket.on('reset',function(){
-		game.Greset();
-	});
-});
-
-io.listen(2222);
+export default app;
