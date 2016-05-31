@@ -27,6 +27,10 @@ export function move(moveBoard, movePos) {
     game = getState().game;
     board = getState().board;
 
+    if (game.winner) {
+      return;
+    }
+
     if (moveBoard === board.active || board.active === 9) {
       if (!board.board[moveBoard][movePos]) {
         dispatch(validMove(moveBoard, movePos, game.player, movePos));
@@ -41,7 +45,7 @@ export function move(moveBoard, movePos) {
     game = getState().game;
     board = getState().board;
 
-    let checkFull = board.board[moveBoard].reduce( (prev, curr) => {
+    let checkFull = board.board[movePos].reduce( (prev, curr) => {
       if (!curr) {
         return prev +1;
       }

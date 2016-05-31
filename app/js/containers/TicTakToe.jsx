@@ -1,9 +1,8 @@
 import React from 'react';
 import Board from '../components/BigBoard';
+import Header from '../containers/Header';
 import { connect } from 'react-redux';
 import { move } from '../actions/move';
-import { newGame } from '../actions/game';
-import NewGame from '../components/NewGame';
 
 function mapStateToProps(store) {
   return {
@@ -17,7 +16,6 @@ class TicTakToe extends React.Component {
   constructor() {
     super();
 
-    this.restart = this.restart.bind(this);
     this.makeMove = this.makeMove.bind(this);
     this.handleResize = this.handleResize.bind(this);
     this.state = {
@@ -30,16 +28,12 @@ class TicTakToe extends React.Component {
     let h = window.innerHeight;
     let size = w > h ? h : w;
     this.setState({
-      size: size * .9,
+      size: size * .8,
     });
   }
 
   makeMove(board, pos) {
     this.props.dispatch(move(board, pos));
-  }
-
-  restart() {
-    this.props.dispatch(newGame(2));
   }
 
   componentDidMount() {
@@ -54,6 +48,7 @@ class TicTakToe extends React.Component {
   render() {
     return (
       <div>
+        <Header />
         <Board
           size={this.state.size}
           board={this.props.board}
@@ -61,7 +56,6 @@ class TicTakToe extends React.Component {
           move={this.makeMove}
           won={this.props.won}
         />
-        <NewGame newGame={this.restart} />
       </div>
     );
   }

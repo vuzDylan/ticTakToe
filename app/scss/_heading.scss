@@ -1,0 +1,30 @@
+$button-color: #4183D7;
+
+.heading {
+  text-align: center;
+  margin: 1% 0 1% 0;
+  h2 {
+    font-size: 1.5em;
+    margin: 0;
+    margin-bottom: 2px;
+    padding: 0;
+  }
+  h3 {
+    font-size: 1em;
+    margin: 0;
+    margin-bottom: 2px;
+    padding: 0;
+    color: #D91E18;
+  }
+  button {
+    border-radius: 5px;
+    border: 2px solid $button-color;
+    color: $button-color;
+    padding: 5px;
+    background: white;
+    &:hover {
+      background: $button-color;
+      color: white;
+    }
+  }
+}
