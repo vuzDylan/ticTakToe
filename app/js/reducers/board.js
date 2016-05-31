@@ -1,5 +1,5 @@
 import { VALID_MOVE } from '../actions/move';
-import { NEW_GAME, FREE_MOVE } from '../actions/game';
+import { NEW_GAME } from '../actions/game';
 
 const initState = {
   board: [
@@ -19,8 +19,9 @@ const initState = {
 function active(state, action) {
   switch(action.type) {
     case NEW_GAME:
-    case FREE_MOVE:
       return 9;
+    case VALID_MOVE:
+      return action.active;
     default:
       return state;
   }

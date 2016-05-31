@@ -22,7 +22,6 @@ class Board extends React.Component {
     });
 
     let boardClass;
-    console.log(this.props.won);
     switch(this.props.won) {
       case 1:
         boardClass = "player-1";
@@ -34,7 +33,6 @@ class Board extends React.Component {
         boardClass = "";
         break;
     }
-    console.log(boardClass);
 
     return (
       <div className={"board " + boardClass}>
