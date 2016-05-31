@@ -1,3 +1,6 @@
+import { checkForWinner } from '../game';
+import { winGame, winBoard, freeMove } from './game';
+
 export const VALID_MOVE = 'VALID_MOVE';
 export const INVALID_MOVE = 'INVALID_MOVE';
 
@@ -18,10 +21,50 @@ function invalidMove(err) {
   };
 }
 
-export function move(board, pos) {
+export function move(moveBoard, movePos) {
   return (dispatch, getState) => {
-    const player = getState().game.player;
-    // change this later
-    dispatch(validMove(board, pos, player, pos));
+    let board, game;
+    game = getState().game;
+    board = getState().board;
+
+    if (moveBoard === board.active || board.active === 9) {
+      if (!board.board[moveBoard][movePos]) {
+        dispatch(validMove(moveBoard, movePos, game.player, movePos));
+      } else {
+        dispatch(invalidMove("That spot is already taken."));
+      }
+    } else {
+      dispatch(invalidMove("You can't move in that board."));
+    }
+
+
+    game = getState().game;
+    board = getState().board;
+
+    let checkFull = board.board[moveBoard].reduce( (prev, curr) => {
+      if (!curr) {
+        return prev +1;
+      }
+      return prev;
+    }, 0)
+
+    if (!checkFull) {
+      dispatch(freeMove());
+    }
+
+    game.won.forEach((val, index) => {
+      if(!val) {
+        let winner = checkForWinner(board.board[index]);
+        if (winner) {
+          dispatch(winBoard(index, winner));
+        }
+      }
+    });
+
+    game = getState().game;
+
+    if (checkForWinner(game.won)) {
+      dispatch(winGame(checkForWinner(game.won)));
+    }
   }
 }
